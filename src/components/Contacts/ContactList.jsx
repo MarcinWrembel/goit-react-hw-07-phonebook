@@ -2,17 +2,19 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import css from './ContactList.module.css';
 import PropTypes from 'prop-types';
-import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/contactSlicer';
+import { selectContacts, selectFilter } from 'redux/selectors';
+import { deleteContact } from 'redux/operations';
 
-const ContactList = ({ lsKey }) => {
-  // const contacts = useSelector(getContacts);
-  const stateContacts = useSelector(getContacts);
-  const filterValue = useSelector(getFilter);
+const ContactList = () => {
+
+  const stateContacts = useSelector(selectContacts);
+  const filterValue = useSelector(selectFilter);
   const dispatch = useDispatch();
 
+  console.log(stateContacts.contacts);
+
   //create filtered array
-  const filteredContacts = stateContacts.filter(contact => {
+  const filteredContacts = stateContacts.contacts.filter(contact => {
     return (
       contact.name.toLowerCase().includes(filterValue.filter.toLowerCase()) ||
       contact.phone.includes(filterValue.filter)
@@ -21,7 +23,6 @@ const ContactList = ({ lsKey }) => {
 
   const handledDelete = id => {
     dispatch(deleteContact(id));
-    localStorage.setItem(lsKey, JSON.stringify(stateContacts));
   };
 
   const liItems = filteredContacts === [] ? "" : filteredContacts.map(item => {
