@@ -13,14 +13,11 @@ import { fetchContacts } from 'redux/operations';
 
 const App = () => {
 const dispatch=useDispatch()
-
 const {isLoading,error}=useSelector(selectContacts)
 
   useEffect(()=>{
     dispatch(fetchContacts())
   },[dispatch])
-
-
 
   return (
     <>
