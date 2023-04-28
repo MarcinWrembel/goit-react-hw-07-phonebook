@@ -11,8 +11,6 @@ const ContactList = () => {
   const filterValue = useSelector(selectFilter);
   const dispatch = useDispatch();
 
-  console.log(stateContacts.contacts);
-
   //create filtered array
   const filteredContacts = stateContacts.contacts.filter(contact => {
     return (
@@ -39,7 +37,7 @@ const ContactList = () => {
     );
   });
 
-  return <ul className={css.contactList}>{liItems}</ul>;
+  return liItems.length > 0 ? <ul className={css.contactList}>{liItems}</ul> : "";
 };
 
 ContactList.propTypes = {

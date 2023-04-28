@@ -17,8 +17,6 @@ const dispatch=useDispatch()
 const {isLoading,error}=useSelector(selectContacts)
 
   useEffect(()=>{
-    console.log('fetch');
-    fetchContacts()
     dispatch(fetchContacts())
   },[dispatch])
 
@@ -26,9 +24,9 @@ const {isLoading,error}=useSelector(selectContacts)
 
   return (
     <>
+    <Section title="Phonebook">
     {isLoading && !error && <h1> Loading...</h1>}
     {error && <p>{error.message}</p>}
-    <Section title="Phonebook">
         <ContactForm />
       </Section>
       <Section title="Contacts">
